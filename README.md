@@ -1,4 +1,4 @@
-# RPI Nats
+# RPI CoreDNS
 
 * Master : [![Circle CI](https://circleci.com/gh/zeiot/rpi-coredns/tree/master.svg?style=svg)](https://circleci.com/gh/zeiot/rpi-coredns/tree/master)
 * Develop : [![Circle CI](https://circleci.com/gh/zeiot/rpi-coredns/tree/develop.svg?style=svg)](https://circleci.com/gh/zeiot/rpi-coredns/tree/develop)
@@ -6,6 +6,8 @@
 Docker image of [CoreDNS][] to use on a [Raspberry PI][].
 
 Exposes Ports : `53`, `9153`
+
+Exported volumes : `/etc/coredns` and `/var/log/coredns`.
 
 Configure binfmt-support on the Docker host (works locally or remotely, i.e: using boot2docker):
 
@@ -23,11 +25,16 @@ Or build :
 # Usage
 
 There is a sample configuration file (*Corefile*) which forwards all queries to 8.8.8.8 and logs them to stdout.
-Launch CoreDNS:
 
-    $ make run version=1.0
+* Launch CoreDNS:
 
+        $ docker run --rm=true -p 8053:53 -p 8053:53/udp -p 9153:9153 -v `pwd`:/etc/coredns zeiot/rpi-coredns:006
 
+* Then request the DNS:
+
+        $ dig @x.x.x.x -p 8053 www.google.com
+
+* You could see [prometheus][] metrics on : `http://x.x.x.x:9153/metrics`.
 
 
 # Supported tags
