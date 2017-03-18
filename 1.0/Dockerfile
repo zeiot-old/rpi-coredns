@@ -21,7 +21,7 @@ MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ENV COREDNS_VERSION 006
 
-RUN apt-get update && apt-get install -y unzip
+# RUN apt-get update && apt-get install -y unzip
 
 ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_armv6l.tgz /coredns.tgz
 
@@ -31,7 +31,7 @@ RUN tar -xf /coredns.tgz && \
     mkdir /etc/coredns && \
     mkdir -p /var/log/coredns
 
-ADD ./Corefile /etc/coredns/Corefile
+# ADD ./Corefile /etc/coredns/Corefile
 
 EXPOSE 53
 EXPOSE 9153
