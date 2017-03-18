@@ -1,5 +1,6 @@
 .:53 {
     proxy . 8.8.8.8:53
     prometheus localhost:9153
-    log /var/log/coredns/coredns.log
+    errors stdout
+    log stdout
 }
