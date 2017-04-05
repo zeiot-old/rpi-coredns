@@ -31,13 +31,12 @@ RUN tar -xf /coredns.tgz && \
     mkdir /etc/coredns && \
     mkdir -p /var/log/coredns
 
-# ADD ./Corefile /etc/coredns/Corefile
+ADD ./Corefile /etc/coredns/Corefile
 
-EXPOSE 53
-EXPOSE 9153
+EXPOSE 9053
 
 VOLUME ["/etc/coredns", "/var/log/coredns/" ]
 
 ENTRYPOINT ["/usr/bin/coredns"]
 
-CMD ["-conf", "/etc/coredns/Corefile"]
+CMD ["-conf", "/etc/coredns/Corefile", "-dns.port", "9053"]
