@@ -5,7 +5,10 @@
 
 Docker image of [CoreDNS][] to use on a [Raspberry PI][].
 
-Exposes Ports : `53`, `9153`
+Exposes Ports :
+
+* `9053` for DNS
+* `8080` for health
 
 Exported volumes : `/etc/coredns` and `/var/log/coredns`.
 

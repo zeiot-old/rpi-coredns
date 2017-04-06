@@ -3,4 +3,5 @@
     prometheus localhost:9153
     errors stdout
     log stdout
+    health localhost:8080
 }

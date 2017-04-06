@@ -34,6 +34,7 @@ RUN tar -xf /coredns.tgz && \
 ADD ./Corefile /etc/coredns/Corefile
 
 EXPOSE 9053
+EXPOSE 8080
 
 VOLUME ["/etc/coredns", "/var/log/coredns/" ]
 
