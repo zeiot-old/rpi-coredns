@@ -12,16 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# VERSION 006
+# VERSION 007
 # AUTHOR:         Nicolas Lamirault <nicolas.lamirault@gmail.com>
 # DESCRIPTION:    zeiot/rpi-coredns
 
 FROM resin/armv7hf-debian:jessie
 MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
-ENV COREDNS_VERSION 006
-
-# RUN apt-get update && apt-get install -y unzip
+ENV COREDNS_VERSION 007
 
 ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_armv6l.tgz /coredns.tgz
 
