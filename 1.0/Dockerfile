@@ -24,7 +24,7 @@ ENV COREDNS_VERSION 010
 ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_armv6l.tgz /coredns.tgz
 
 RUN tar -xf /coredns.tgz && \
-    /coredns.tgz && \
+    rm /coredns.tgz && \
     mv /coredns /usr/bin/coredns && \
 #RUN mv /coredns.tgz/coredns /usr/bin/coredns && \
 #    mkdir /etc/coredns && \
