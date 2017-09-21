@@ -1,6 +1,10 @@
 RPI CoreDNS ChangeLog
 =================================
 
+# Version 0.3.0 (09/21/2017)
+
+- Update to CoreDNS 011
+
 # Version 0.2.0 (09/21/2017)
 
 - Migrate to Gitlab
