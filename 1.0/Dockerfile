@@ -12,23 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# VERSION 010
+# VERSION 011
 # AUTHOR:         Nicolas Lamirault <nicolas.lamirault@gmail.com>
 # DESCRIPTION:    zeiot/rpi-coredns
 
 FROM resin/armv7hf-debian:stretch
 MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
-ENV COREDNS_VERSION 010
+ENV COREDNS_VERSION 011
 
 ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_armv6l.tgz /coredns.tgz
 
-RUN tar -zxvf /coredns.tgz
-RUN rm /coredns.tgz
-RUN mv /coredns /usr/bin/coredns
-#RUN mv /coredns.tgz/coredns /usr/bin/coredns && \
-#    mkdir /etc/coredns && \
-#    mkdir -p /var/log/coredns
+RUN tar -zxvf /coredns.tgz \
+    && rm /coredns.tgz \
+    && mv /coredns /usr/bin/coredns
 
 ADD ./Corefile /etc/coredns/Corefile
 
