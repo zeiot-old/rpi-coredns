@@ -25,7 +25,7 @@ ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/cor
 
 RUN tar -zxvf /coredns.tgz
 RUN rm /coredns.tgz
-RUN /coredns /usr/bin/coredns
+RUN mv /coredns /usr/bin/coredns
 #RUN mv /coredns.tgz/coredns /usr/bin/coredns && \
 #    mkdir /etc/coredns && \
 #    mkdir -p /var/log/coredns
