@@ -1,7 +1,6 @@
 # RPI CoreDNS
 
-* Master : [![Circle CI](https://circleci.com/gh/zeiot/rpi-coredns/tree/master.svg?style=svg)](https://circleci.com/gh/zeiot/rpi-coredns/tree/master)
-* Develop : [![Circle CI](https://circleci.com/gh/zeiot/rpi-coredns/tree/develop.svg?style=svg)](https://circleci.com/gh/zeiot/rpi-coredns/tree/develop)
+* Master: [![pipeline status](https://gitlab.com/zeiot/rpi-coredns/badges/master/pipeline.svg)](https://gitlab.com/zeiot/rpi-coredns/commits/master)
 
 Docker image of [CoreDNS][] to use on a [Raspberry PI][].
 
