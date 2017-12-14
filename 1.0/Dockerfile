@@ -21,7 +21,7 @@ MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ENV COREDNS_VERSION 1.0.0
 
-ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_armv6l.tgz /coredns.tgz
+ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_arm.tgz /coredns.tgz
 
 RUN tar -zxvf /coredns.tgz \
     && rm /coredns.tgz \
