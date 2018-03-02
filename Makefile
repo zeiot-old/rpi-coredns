@@ -37,21 +37,21 @@ help:
 .PHONY: build
 build:
 	@echo -e "$(OK_COLOR)[$(APP)] build $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	@$(DOCKER) build -t $(NAMESPACE)/$(IMAGE):${VERSION} $(version)
+	@$(DOCKER) build -t $(NAMESPACE)/$(IMAGE):v${VERSION} $(version)
 
 .PHONY: run
 run:
 	@echo -e "$(OK_COLOR)[$(APP)] run $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
 	$(DOCKER) run --rm=true -p 8053:53 -p 8053:53/udp -p 9153:9153 \
 		-v `pwd`/$(version)/:/etc/coredns \
-		$(NAMESPACE)/$(IMAGE):$(VERSION)
+		$(NAMESPACE)/$(IMAGE):v$(VERSION)
 
 .PHONY: debug
 debug:
 	@echo -e "$(OK_COLOR)[$(APP)] run $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
 	$(DOCKER) run --rm=true -p 8053:53 -p 8053:53/udp -p 9153:9153 \
 		-v `pwd`/$(version)/:/etc/coredns \
-		$(NAMESPACE)/$(IMAGE):$(VERSION) /bin/bash
+		$(NAMESPACE)/$(IMAGE):v$(VERSION) /bin/bash
 
 .PHONY: login
 login:
@@ -60,4 +60,5 @@ login:
 .PHONY: publish
 publish:
 	@echo -e "$(OK_COLOR)[$(APP)] Publish $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	@$(DOCKER) push $(NAMESPACE)/$(IMAGE):$(VERSION)
+	@$(DOCKER) push $(NAMESPACE)/$(IMAGE):v$(VERSION)
+
