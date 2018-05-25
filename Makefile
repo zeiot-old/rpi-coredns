@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# Copyright (C) 2016-2018 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +13,11 @@
 # limitations under the License.
 
 APP=zeiot
+
 NAMESPACE=$(APP)
 IMAGE=rpi-coredns
+
+REGISTRY_IMAGE ?= $(NAMESPACE)/$(IMAGE)
 
 NO_COLOR=\033[0m
 OK_COLOR=\033[32;01m
@@ -24,41 +27,35 @@ WARN_COLOR=\033[33;01m
 DOCKER = docker
 
 ifneq ($(version),)
-	VERSION := $(shell grep ' VERSION' ${version}/Dockerfile|awk -F" " '{ print $$3 }')
+	VERSION := $(shell grep ' VERSION' ${version}/Dockerfile.arm|awk -F" " '{ print $$3 }')
 endif
+
+arch ?= arm
 
 all: help
 
 help:
 	@echo -e "$(OK_COLOR)==== $(APP) / $(IMAGE) ====$(NO_COLOR)"
-	@echo -e "$(WARN_COLOR)- build version=xx   : Make the Docker image"
-	@echo -e "$(WARN_COLOR)- publish version=xx : Publish the image"
+	@echo -e "$(WARN_COLOR)- build version=xx   : Make the Docker image$(NO_COLOR)"
+	@echo -e "$(WARN_COLOR)- publish version=xx : Publish the image$(NO_COLOR)"
+	@echo -e "optional argument: arch=$(arch)"
+	@echo -e "Registry: $(REGISTRY_IMAGE)"
 
 .PHONY: build
 build:
-	@echo -e "$(OK_COLOR)[$(APP)] build $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	@$(DOCKER) build -t $(NAMESPACE)/$(IMAGE):v${VERSION} $(version)
+	@echo -e "$(OK_COLOR)[$(APP)] build $(REGISTRY_IMAGE):v$(VERSION)-$(arch)$(NO_COLOR)"
+	@$(DOCKER) build -t $(REGISTRY_IMAGE):v${VERSION}-$(arch) $(version) -f $(version)/Dockerfile.$(arch)
 
 .PHONY: run
 run:
-	@echo -e "$(OK_COLOR)[$(APP)] run $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	$(DOCKER) run --rm=true -p 8053:53 -p 8053:53/udp -p 9153:9153 \
-		-v `pwd`/$(version)/:/etc/coredns \
-		$(NAMESPACE)/$(IMAGE):v$(VERSION)
-
-.PHONY: debug
-debug:
-	@echo -e "$(OK_COLOR)[$(APP)] run $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	$(DOCKER) run --rm=true -p 8053:53 -p 8053:53/udp -p 9153:9153 \
-		-v `pwd`/$(version)/:/etc/coredns \
-		$(NAMESPACE)/$(IMAGE):v$(VERSION) /bin/bash
+	@echo -e "$(OK_COLOR)[$(APP)] run $(REGISTRY_IMAGE):v$(VERSION)-$(arch)$(NO_COLOR)"
+	@$(DOCKER) run --rm=true -p 9090:9090 $(REGISTRY_IMAGE):v$(VERSION)-$(arch)
 
 .PHONY: login
 login:
 	@$(DOCKER) login
 
-.PHONY: publish
+.PHONY: publish-arm
 publish:
-	@echo -e "$(OK_COLOR)[$(APP)] Publish $(NAMESPACE)/$(IMAGE):$(VERSION)$(NO_COLOR)"
-	@$(DOCKER) push $(NAMESPACE)/$(IMAGE):v$(VERSION)
-
+	@echo -e "$(OK_COLOR)[$(APP)] Publish $(REGISTRY_IMAGE):v$(VERSION)-$(arch)$(NO_COLOR)"
+	@$(DOCKER) push $(REGISTRY_IMAGE):v$(VERSION)-$(arch)
