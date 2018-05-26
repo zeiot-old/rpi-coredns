@@ -26,6 +26,8 @@ LABEL summary="CoreDNS for ARM" \
 
 ENV COREDNS_VERSION 1.1.2
 
+RUN [ "cross-build-start" ]
+
 ADD https://github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_arm.tgz /coredns.tgz
 
 RUN tar -zxvf /coredns.tgz \
@@ -33,6 +35,8 @@ RUN tar -zxvf /coredns.tgz \
     && mv /coredns /usr/bin/coredns
 
 ADD ./Corefile /etc/coredns/Corefile
+
+RUN [ "cross-build-end" ]
 
 EXPOSE  9053
 EXPOSE  8080
