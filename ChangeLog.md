@@ -1,6 +1,11 @@
 RPI CoreDNS ChangeLog
 =================================
 
+# Version 1.1.0 (05/27/2018)
+
+- Support for multi arch (ARM and ARM64)
+- 1.1.x: use stable version
+
 # Version 1.0.0 (03/02/2017)
 
 - 1.0.x: use stable version
