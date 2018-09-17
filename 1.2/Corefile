@@ -1,0 +1,7 @@
+.: {
+    proxy . 8.8.8.8:53
+    prometheus localhost:9153
+    errors stdout
+    log stdout
+    health localhost:8080
+}
