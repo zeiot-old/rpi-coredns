@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# VERSION 1.2.2
+# VERSION 1.2.4
 # AUTHOR:         Nicolas Lamirault <nicolas.lamirault@gmail.com>
 # DESCRIPTION:    zeiot/rpi-coredns
 
@@ -24,7 +24,7 @@ LABEL summary="CoreDNS for ARM" \
       url="https://github.com/zeiot/rpi-coredns" \
       maintainer="Nicolas Lamirault <nicolas.lamirault@gmail.com>"
 
-ENV COREDNS_VERSION 1.2.2
+ENV COREDNS_VERSION 1.2.4
 
 RUN [ "cross-build-start" ]
 
